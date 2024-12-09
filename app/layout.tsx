@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
+// app/layout.tsx
+import { Suspense } from 'react'
 import { CartProvider } from './context/CartContext'
-import { GoogleAnalytics } from '././components/GoogleAnalytics'
-import { Suspense } from "react";
+import { TrackingProvider } from './components/TrackingProvider'
+import { GoogleAnalytics } from './components/GoogleAnalytics'
+import './globals.css'
 
 /*const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,7 +31,9 @@ export default function RootLayout({
       <body>
         <Suspense>
         <CartProvider>
-          {children}
+          <TrackingProvider>
+            {children}
+          </TrackingProvider>
         </CartProvider>
         <GoogleAnalytics />
         </Suspense>
