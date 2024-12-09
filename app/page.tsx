@@ -2,7 +2,26 @@
 'use client'
 import Link from 'next/link'
 
+declare global {
+  interface Window {
+    gtag: (command: string, action: string, params: any) => void;
+  }
+}
+
 export default function Home() {
+  const trackNavClick = (destination: string) => {
+    window.gtag('event', 'navigation_click', {
+      destination: destination,
+      source: 'homepage'
+    });
+  };
+
+  const trackBrowseClick = () => {
+    window.gtag('event', 'browse_products_click', {
+      source: 'homepage_hero'
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white shadow-lg">
@@ -10,13 +29,55 @@ export default function Home() {
           <div className="flex justify-between items-center">
             <span className="text-2xl font-bold text-gray-800">Vintage Audio</span>
             <div className="flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
-              <Link href="/products" className="text-gray-600 hover:text-gray-800">Menu</Link>
-              <Link href="/products/cassettes" className="text-gray-600 hover:text-gray-800">Cassettes</Link>
-              <Link href="/products/cds" className="text-gray-600 hover:text-gray-800">CDs</Link>
-              <Link href="/products/mds" className="text-gray-600 hover:text-gray-800">MDs</Link>
-              <Link href="/products/mp3" className="text-gray-600 hover:text-gray-800">MP3</Link>
-              <Link href="/about" className="text-gray-600 hover:text-gray-800">About</Link>
+              <Link 
+                href="/" 
+                onClick={() => trackNavClick('home')}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                Home
+              </Link>
+              <Link 
+                href="/products" 
+                onClick={() => trackNavClick('menu')}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                Menu
+              </Link>
+              <Link 
+                href="/products/cassettes" 
+                onClick={() => trackNavClick('cassettes')}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                Cassettes
+              </Link>
+              <Link 
+                href="/products/cds" 
+                onClick={() => trackNavClick('cds')}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                CDs
+              </Link>
+              <Link 
+                href="/products/mds" 
+                onClick={() => trackNavClick('mds')}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                MDs
+              </Link>
+              <Link 
+                href="/products/mp3" 
+                onClick={() => trackNavClick('mp3')}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                MP3
+              </Link>
+              <Link 
+                href="/about" 
+                onClick={() => trackNavClick('about')}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                About
+              </Link>
             </div>
           </div>
         </div>
@@ -34,17 +95,19 @@ export default function Home() {
               Vintage Audio Paradise
             </h1>
             <p className="text-xl md:text-2xl text-gray-200 mb-10">
-              Experience the warmth of analog sound with our carefully curated collection of vintage audio equipment
+              Experience the warmth of analog sound with our carefully curated collection
             </p>
             <div className="space-x-4">
               <Link 
                 href="/products" 
+                onClick={trackBrowseClick}
                 className="bg-white text-gray-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 inline-block"
               >
                 Browse Collection
               </Link>
               <Link 
                 href="/about" 
+                onClick={() => trackNavClick('about_hero')}
                 className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-white/10 inline-block"
               >
                 Learn More
