@@ -1,9 +1,9 @@
-// app/layout.tsx
-import { Suspense } from 'react'
+import type { Metadata } from "next";
+import "./globals.css";
 import { CartProvider } from './context/CartContext'
+import { GoogleAnalytics } from '././components/GoogleAnalytics'
 import { TrackingProvider } from './components/TrackingProvider'
-import { GoogleAnalytics } from './components/GoogleAnalytics'
-import './globals.css'
+import { Suspense } from "react";
 
 /*const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
