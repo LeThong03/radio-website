@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from './context/CartContext'
-import { GoogleAnalytics } from '././components/GoogleAnalytics'
-import { TrackingProvider } from './components/TrackingProvider'
 import { Suspense } from "react";
+import Script from 'next/script'
+
 
 /*const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,13 +30,24 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Suspense>
-        <CartProvider>
-          <TrackingProvider>
+          <CartProvider>
             {children}
-          </TrackingProvider>
-        </CartProvider>
-        <GoogleAnalytics />
+          </CartProvider>
         </Suspense>
+        
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-1CP4J53429`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1CP4J53429');
+          `}
+        </Script>
       </body>
     </html>
   )
