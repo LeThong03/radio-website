@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { CartProvider } from './context/CartContext'
 import { GoogleAnalytics } from '././components/GoogleAnalytics'
+import { Suspense } from "react";
 
 /*const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,10 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Suspense>
         <CartProvider>
           {children}
         </CartProvider>
         <GoogleAnalytics />
+        </Suspense>
       </body>
     </html>
   )
