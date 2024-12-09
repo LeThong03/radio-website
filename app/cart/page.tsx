@@ -13,7 +13,7 @@ export default function CartPage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center p-8 bg-white rounded-lg shadow-md max-w-md w-full">
           <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
-          <p className="text-gray-600 mb-6">Looks like you haven't added any items yet.</p>
+          <p className="text-gray-600 mb-6">Looks like you haven&apos;t added any items yet.</p>
           <Link 
             href="/products" 
             className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
@@ -24,7 +24,6 @@ export default function CartPage() {
       </div>
     )
   }
-
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4">
