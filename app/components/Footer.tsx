@@ -19,7 +19,6 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><Link href="/" className="text-gray-400 hover:text-white">Home</Link></li>
               <li><Link href="/products" className="text-gray-400 hover:text-white">Products</Link></li>
-              <li><Link href="/about" className="text-gray-400 hover:text-white">About Us</Link></li>
               <li><Link href="/cart" className="text-gray-400 hover:text-white">Shopping Cart</Link></li>
             </ul>
           </div>
@@ -39,7 +38,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>Email: info@vintageaudio.com</li>
+              <li>Email: quayquayricho@yahoo.com</li>
               <li>Phone: (84) 934 858 710</li>
               <li>Address: District 10, Ho Chi Minh City, Viet Nam</li>
             </ul>
