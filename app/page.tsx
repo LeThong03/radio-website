@@ -33,15 +33,22 @@ const categories = [
   }
 ];
 
-const trackFacebookClick = () => {
-  // GA4 event tracking
-  window.gtag('event', 'social_click', {
-    social_platform: 'facebook',
-    content_type: 'shop_link',
-    outbound: true
-  });
-};
+declare global {
+  interface Window {
+    gtag: (command: string, action: string, params: any) => void;
+  }
+}
 
+// Add this function to track Facebook clicks
+const trackFacebookClick = () => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'social_click', {
+      social_platform: 'facebook',
+      content_type: 'shop_link',
+      outbound: true
+    });
+  }
+};
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
