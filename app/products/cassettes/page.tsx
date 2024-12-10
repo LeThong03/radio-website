@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 const cassetteProducts = [
   {
-    id: 'c1',
+    id: 'cassette-1',
     name: 'Sony WM-2',
     price: 149.99,
     description: 'Sony WM-2 – Lỗi thời hay Dấu ấn ? Bạn yêu thích những bản nhạc xưa đầy cảm xúc hay muốn trải nghiệm chất lượng âm thanh vượt thời gian? Sony WM-2 chắc chắn sẽ không làm bạn thất vọng WM-2 mang lại chất lượng âm thanh tuyệt hảo nhờ công nghệ xử lý âm thanh tiên tiến của Sony. Mỗi giai điệu, mỗi nhịp bass đều được tái hiện sống động, trung thực đến từng chi tiết.Với màu đỏ đô cực hiếm cùng cặp tai MDR-E838 bản crystal red là một cặp đôi nguyên tử đem lại những nốt cao thăng hoa và những nốt trầm xao xuyến trong từng bản nhạc Dù bạn là tín đồ công nghệ, người đam mê âm nhạc hay đơn giản là muốn tìm một món quà ý nghĩa, Sony WM-2 sẽ là lựa chọn hoàn hảo.',
@@ -15,7 +15,7 @@ const cassetteProducts = [
     image: '../images/cassettes/cassett1.jpg',
   },
   {
-    id: 'c2',
+    id: 'cassette-2',
     name: 'Cassette Player TPS-L2',
     price: 129.99,
     description: 'Bạn có biết chiếc máy cassette Sony TPS-L2, chiếc Walkman đầu tiên trên thế giới, đã tạo ra một cuộc cách mạng thực sự trong cách chúng ta nghe nhạc? Ra đời vào năm 1979, sản phẩm này không chỉ mang lại âm nhạc bên bạn mọi lúc mọi nơi mà còn mở ra một phong cách sống hoàn toàn mới. Nếu bạn là một người yêu âm nhạc, thích hoài cổ nhưng vẫn muốn tận hưởng chất lượng vượt thời gian, thì Sony TPS-L2 là đáp án cho mọi yêu cầu của bạn.Với kích thước vừa phải, lớp vỏ kim loại bền bỉ và tông màu xanh – bạc đặc trưng, TPS-L2 không chỉ là một chiếc máy cassette, mà còn là biểu tượng của thời trang và phong cách. Phù hợp để bạn mang theo khắp nơi, dù là dạo phố hay trong các chuyến du lịch xa.Sony TPS-L2 được thiết kế với công nghệ tiên tiến, mang lại âm thanh trung thực và sống động. Dù là những giai điệu pop sôi động hay bản nhạc jazz trầm lắng, chiếc máy cassette này đều tái hiện một cách hoàn hảo.Một tính năng đặc biệt của TPS-L2 là trang bị hai cổng tai nghe, giúp bạn dễ dàng chia sẻ âm nhạc với bạn bè hoặc người thân – một trải nghiệm hiếm có ở các thiết bị nghe nhạc thời đó.Với khả năng sử dụng pin AA, TPS-L2 mang lại thời gian phát nhạc lâu dài, đảm bảo đồng hành cùng bạn trong mọi hoạt động mà không lo ngại gián đoạn. Các nút điều khiển trên TPS-L2 được thiết kế trực quan và dễ dàng thao tác, phù hợp cho cả những người mới sử dụng.',
@@ -23,7 +23,7 @@ const cassetteProducts = [
     image: '../images/cassettes/cassett2.jpg'
   },
   {
-    id: 'c3',
+    id: 'cassette-3',
     name: 'AIWA HS-PC202 – Máy Cassette Huyền Thoại Dành Cho Tín Đồ Âm Nhạc Cổ Điển',
     price: 199.99,
     description: 'Bạn yêu thích những bản nhạc được phát từ băng cassette? Bạn muốn trải nghiệm âm thanh mộc mạc nhưng đầy cảm xúc từ những thiết bị hoài cổ? AIWA HS-PC202 là chiếc máy cassette hoàn hảo dành cho bạn! Với thiết kế đậm chất retro, chất lượng âm thanh vượt thời gian và những tính năng hiện đại so với thời kỳ của nó, HS-PC202 chính là biểu tượng của sự kết hợp giữa công nghệ và nghệ thuật. Trang bị công nghệ tiên tiến, HS-PC202 mang lại âm thanh mượt mà, chân thực và đầy cảm xúc. Những giai điệu từ chiếc băng cassette sẽ được tái hiện sống động, gợi nhớ những ký ức đẹp trong quá khứ. HS-PC202 được tích hợp tính năng Auto-Reverse, cho phép băng tự động phát mặt B mà không cần tháo ra đảo chiều. Đây là tính năng tiên tiến mà không phải máy cassette nào cùng thời cũng có. AIWA HS-PC202 đi kèm với tai nghe chất lượng cao, mang lại trải nghiệm âm thanh riêng tư và chân thực nhất.',

@@ -3,16 +3,27 @@
 import { useCart } from '../context/CartContext'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function CartPage() {
   const { items, removeItem, total } = useCart()
   const [isCheckingOut, setIsCheckingOut] = useState(false)
+  const router = useRouter()
+
+  const handleCheckout = async () => {
+    setIsCheckingOut(true)
+    try {
+      router.push('/checkout')
+    } catch (error) {
+      setIsCheckingOut(false)
+    }
+  }
 
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center p-8 bg-white rounded-lg shadow-md max-w-md w-full">
-          <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
+          <h2 className="text-2xl font-bold text-blue-600 mb-4">Your cart is empty</h2>
           <p className="text-gray-600 mb-6">Looks like you haven&apos;t added any items yet.</p>
           <Link 
             href="/products" 
@@ -24,10 +35,11 @@ export default function CartPage() {
       </div>
     )
   }
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
+        <h1 className="text-3xl font-bold text-blue-600 mb-8">Shopping Cart</h1>
         
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Cart Items */}
@@ -46,9 +58,11 @@ export default function CartPage() {
                     className="w-24 h-24 object-cover rounded-lg"
                   />
                   <div className="ml-6 flex-1">
-                    <h3 className="text-lg font-semibold">{item.name}</h3>
-                    <p className="text-gray-600 mt-1">Quantity: {item.quantity}</p>
-                    <p className="text-lg font-bold text-blue-600 mt-2">
+                    <h3 className="text-xl font-bold text-blue-600">{item.name}</h3>
+                    <p className="text-gray-600 mt-1">
+                      Quantity: <span className="font-bold text-blue-600">{item.quantity}</span>
+                    </p>
+                    <p className="text-xl font-bold text-green-600 mt-2">
                       ${item.price.toFixed(2)}
                     </p>
                   </div>
@@ -69,21 +83,21 @@ export default function CartPage() {
           {/* Order Summary */}
           <div className="lg:w-1/3">
             <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
-              <h2 className="text-xl font-bold mb-6">Order Summary</h2>
+              <h2 className="text-2xl font-bold text-blue-600 mb-6">Order Summary</h2>
               
               <div className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="font-semibold">${total.toFixed(2)}</span>
+                  <span className="text-lg font-semibold">Subtotal</span>
+                  <span className="text-lg font-bold text-green-600">${total.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className="font-semibold">Free</span>
+                  <span className="text-lg font-semibold">Shipping</span>
+                  <span className="text-lg font-bold text-green-600">Free</span>
                 </div>
                 <div className="border-t pt-4">
                   <div className="flex justify-between">
-                    <span className="text-lg font-bold">Total</span>
-                    <span className="text-lg font-bold text-blue-600">
+                    <span className="text-xl font-bold text-blue-600">Total</span>
+                    <span className="text-xl font-bold text-green-600">
                       ${total.toFixed(2)}
                     </span>
                   </div>
@@ -91,9 +105,9 @@ export default function CartPage() {
               </div>
 
               <button
-                onClick={() => setIsCheckingOut(true)}
+                onClick={handleCheckout}
                 disabled={isCheckingOut}
-                className={`w-full mt-6 px-6 py-3 rounded-lg text-white font-semibold
+                className={`w-full mt-6 px-6 py-3 rounded-lg text-white font-bold text-lg
                   ${isCheckingOut 
                     ? 'bg-gray-400 cursor-not-allowed'
                     : 'bg-blue-600 hover:bg-blue-700 transition-colors'
@@ -104,7 +118,7 @@ export default function CartPage() {
 
               <Link 
                 href="/products"
-                className="block text-center mt-4 text-blue-600 hover:text-blue-800"
+                className="block text-center mt-4 text-blue-600 hover:text-blue-800 font-semibold"
               >
                 Continue Shopping
               </Link>

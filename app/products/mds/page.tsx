@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const mdProducts = [
   {
-    id: 'md1',
+    id: 'md-1',
     name: 'MiniDisc Player MZ-2P',
     price: 299.99,
     description: 'Khám Phá Thế Giới Âm Nhạc Mới Lạ Cùng MiniDisc MZ-2P - Kho báu đã bị lãng quên theo thời gian  Nếu bạn là người yêu thích âm nhạc và luôn tìm kiếm những thiết bị âm thanh nhỏ gọn nhưng mạnh mẽ, thì MiniDisc MZ-2P chính là lựa chọn lý tưởng để đưa bạn vào một hành trình âm nhạc chưa từng có. Với công nghệ MiniDisc tiên tiến, bạn có thể nghe đến 90 phút playback SP cho mỗi đĩa MD mà bạn đang sở hữu.  Đem lại trải nghiệm ngọt ngào nịnh tai hơn cả CD, MiniDisc MZ-2P mang đến chất lượng âm thanh sắc nét, trung thực và đầy cảm xúc. Với khả năng mã hóa âm thanh kỹ thuật số tiên tiến, MZ-2P tái hiện âm nhạc một cách sống động và chi tiết, cho phép bạn thưởng thức những bản nhạc yêu thích một cách hoàn hảo. Một trong những tính năng nổi bật của MZ-2P chính là khả năng chống sốc cực kỳ hiệu quả. Dù bạn có đang di chuyển nhanh chóng hay tham gia các hoạt động ngoài trời, MiniDisc MZ-2P luôn đảm bảo âm nhạc của bạn không bị gián đoạn.',
@@ -15,7 +15,7 @@ const mdProducts = [
     image: '../images/mds/md1.jpg'
   },
   {
-    id: 'md2',
+    id: 'md-2',
     name: 'Minidisc Player MZ-RH1',
     price: 249.99,
     description: 'MiniDisc RH1 – Công nghệ đỉnh nóc của những năm 2000. Nếu bạn là tín đồ yêu thích âm nhạc và luôn tìm kiếm một thiết bị nhỏ gọn, đa năng nhưng không kém phần mạnh mẽ, thì MiniDisc RH1 chính là lựa chọn lý tưởng dành cho bạn. Với sự kết hợp hoàn hảo giữa công nghệ ghi âm tiên tiến và khả năng phát lại chất lượng cao, MiniDisc RH1 mang đến một trải nghiệm âm nhạc mới mẻ, sống động, không giới hạn! Màn Hình Oled mang lại độ sáng và sắc nét cực kì cao, cùng 2 thanh level meter nổi bật góp phần thiết kế càng sang trọng, toát ra vẻ đẳng cấp của một thiết bị portable thuốc phân khúc đầu bảng RH1 không chỉ là một máy nghe nhạc thông thường, mà còn là một thiết bị ghi âm đa năng, cho phép bạn ghi lại các buổi hội thảo, những ý tưởng âm nhạc mới, hoặc thậm chí là các chương trình radio yêu thích. Với khả năng ghi âm chất lượng cao và lưu trữ lên đến 1GB, bạn có thể dễ dàng lưu trữ và phát lại những khoảnh khắc đáng nhớ. MiniDisc RH1 hỗ trợ đầy đủ các định dạng âm thanh, bao gồm MiniDisc và MP3, giúp bạn thoải mái thưởng thức mọi bộ sưu tập nhạc yêu thích. Hệ thống mã hóa âm thanh ATRAC3+ giúp giảm thiểu dung lượng lưu trữ mà vẫn đảm bảo chất lượng âm thanh tuyệt vời, cho phép bạn lưu trữ nhiều bài hát trong một không gian nhỏ gọn. MiniDisc RH1 trang bị các cổng kết nối đa dạng, bao gồm cổng USB để bạn dễ dàng chuyển nhạc từ máy tính vào thiết bị. Bạn có thể chia sẻ và thưởng thức âm nhạc yêu thích mọi lúc mọi nơi, kết nối và sao chép âm thanh từ các nguồn khác nhau một cách nhanh chóng và thuận tiện.',
@@ -23,7 +23,7 @@ const mdProducts = [
     image: '../images/mds/md2.jpg'
   },
   {
-    id: 'md3',
+    id: 'md-3',
     name: 'MiniDisc Player MZ-R37',
     price: 279.99,
     description: 'Món trang sức của công nghệ thời đại - MZ-R37 Chào mừng bạn đến với một thế giới âm thanh hoàn toàn mới, nơi chất lượng và tiện ích hội tụ hoàn hảo! Với MZ-R37, bạn sẽ không chỉ nghe, mà còn cảm nhận âm nhạc theo cách mà nó xứng đáng có. Thiết kế tinh tế, công nghệ hiện đại và khả năng truyền tải âm thanh vượt trội, MZ-R37 là sự lựa chọn lý tưởng cho mọi tín đồ yêu thích âm nhạc và công nghệ. Được trang bị công nghệ tiên tiến, MZ-R37 mang đến âm thanh sống động, sắc nét, với độ chi tiết và độ chính xác cao. Dù bạn nghe nhạc pop sôi động hay những bản ballad trữ tình, mọi âm điệu đều được tái tạo rõ ràng, chính xác đến từng nốt nhạc. Bạn sẽ cảm nhận được sự khác biệt ngay từ lần nghe đầu tiên. Đừng bỏ lỡ cơ hội sở hữu MZ-R37, sản phẩm mang đến một trải nghiệm âm thanh tuyệt vời và một thiết kế đầy tính năng thông minh. Cho dù bạn là một người đam mê công nghệ, hay đơn giản là yêu thích âm nhạc, MZ-R37 sẽ không làm bạn thất vọng.',
