@@ -11,7 +11,7 @@ export default function Navigation() {
     <nav className="bg-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          <span className="text-2xl font-bold text-gray-800">Vintage Audio</span>
+          <span className="text-2xl font-bold text-gray-800">Quậy Rì-chô</span>
           <div className="flex items-center space-x-6">
             <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
             <Link href="/products" className="text-gray-600 hover:text-gray-800">Menu</Link>
@@ -19,7 +19,6 @@ export default function Navigation() {
             <Link href="/products/cds" className="text-gray-600 hover:text-gray-800">CDs</Link>
             <Link href="/products/mds" className="text-gray-600 hover:text-gray-800">MDs</Link>
             <Link href="/products/mp3" className="text-gray-600 hover:text-gray-800">MP3</Link>
-            <Link href="/about" className="text-gray-600 hover:text-gray-800">About</Link>
             <Link href="/cart" className="relative">
               <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                 Cart

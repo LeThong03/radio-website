@@ -2,120 +2,130 @@
 'use client'
 import Link from 'next/link'
 
-declare global {
-  interface Window {
-    gtag: (command: string, action: string, params: any) => void;
+const categories = [
+  {
+    id: 'cassettes',
+    name: 'Cassette Players',
+    description: 'Classic portable audio with vintage charm',
+    image: '/images/cassettes/cassett1.jpg',
+    link: '/products/cassettes'
+  },
+  {
+    id: 'cds',
+    name: 'CD Players',
+    description: 'Digital clarity with retro style',
+    image: '/images/cds/cd1.jpg',
+    link: '/products/cds'
+  },
+  {
+    id: 'mds',
+    name: 'MD Players',
+    description: 'The perfect blend of digital and physical media',
+    image: '/images/mds/md1.jpg',
+    link: '/products/mds'
+  },
+  {
+    id: 'mp3',
+    name: 'MP3 Players',
+    description: 'Vintage digital audio devices',
+    image: '/images/mp3/mp3-1.jpg',
+    link: '/products/mp3'
   }
-}
+];
+
+const trackFacebookClick = () => {
+  // GA4 event tracking
+  window.gtag('event', 'social_click', {
+    social_platform: 'facebook',
+    content_type: 'shop_link',
+    outbound: true
+  });
+};
 
 export default function Home() {
-  const trackNavClick = (destination: string) => {
-    window.gtag('event', 'navigation_click', {
-      destination: destination,
-      source: 'homepage'
-    });
-  };
-
-  const trackBrowseClick = () => {
-    window.gtag('event', 'browse_products_click', {
-      source: 'homepage_hero'
-    });
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Navigation Bar with Facebook Icon */}
       <nav className="bg-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
-            <span className="text-2xl font-bold text-gray-800">Vintage Audio</span>
-            <div className="flex space-x-6">
-              <Link 
-                href="/" 
-                onClick={() => trackNavClick('home')}
-                className="text-gray-600 hover:text-gray-800"
+            <span className="text-2xl font-bold text-gray-800">Quậy Rì-chô</span>
+            <div className="flex items-center space-x-6">
+              <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
+              <Link href="/products" className="text-gray-600 hover:text-gray-800">Menu</Link>
+              <Link href="/products/cassettes" className="text-gray-600 hover:text-gray-800">Cassettes</Link>
+              <Link href="/products/cds" className="text-gray-600 hover:text-gray-800">CDs</Link>
+              <Link href="/products/mds" className="text-gray-600 hover:text-gray-800">MDs</Link>
+              <Link href="/products/mp3" className="text-gray-600 hover:text-gray-800">MP3</Link>
+              <a 
+                href="https://www.facebook.com/profile.php?id=100077053847637" // Replace with your Facebook URL
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={trackFacebookClick}
+                className="text-blue-600 hover:text-blue-700 transition-colors"
               >
-                Home
-              </Link>
-              <Link 
-                href="/products" 
-                onClick={() => trackNavClick('menu')}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                Menu
-              </Link>
-              <Link 
-                href="/products/cassettes" 
-                onClick={() => trackNavClick('cassettes')}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                Cassettes
-              </Link>
-              <Link 
-                href="/products/cds" 
-                onClick={() => trackNavClick('cds')}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                CDs
-              </Link>
-              <Link 
-                href="/products/mds" 
-                onClick={() => trackNavClick('mds')}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                MDs
-              </Link>
-              <Link 
-                href="/products/mp3" 
-                onClick={() => trackNavClick('mp3')}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                MP3
-              </Link>
-              <Link 
-                href="/about" 
-                onClick={() => trackNavClick('about')}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                About
-              </Link>
+                <svg 
+                  className="w-6 h-6 fill-current" 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z"/>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
       </nav>
-
       <div className="relative bg-gray-900 h-[600px]">
         <img 
-          src="/api/placeholder/1920/1080" 
+          src="/images/logo/logo.jpg" 
           alt="Vintage audio collection"
           className="w-full h-full object-cover opacity-50"
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center max-w-4xl px-4">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Vintage Audio Paradise
+            Quậy Rì-chô
             </h1>
             <p className="text-xl md:text-2xl text-gray-200 mb-10">
               Experience the warmth of analog sound with our carefully curated collection
             </p>
-            <div className="space-x-4">
-              <Link 
-                href="/products" 
-                onClick={trackBrowseClick}
-                className="bg-white text-gray-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 inline-block"
-              >
-                Browse Collection
-              </Link>
-              <Link 
-                href="/about" 
-                onClick={() => trackNavClick('about_hero')}
-                className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-white/10 inline-block"
-              >
-                Learn More
-              </Link>
-            </div>
+            <Link 
+              href="/products" 
+              className="bg-white text-gray-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 inline-block"
+            >
+              Browse Collection
+            </Link>
           </div>
         </div>
       </div>
+
+      {/* Categories Section */}
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold text-center mb-12">Browse By Category</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {categories.map(category => (
+            <Link key={category.id} href={category.link}>
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div className="relative h-48">
+                  <img 
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-30 transition-all duration-300">
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="text-xl font-bold text-white mb-1">{category.name}</h3>
+                      <p className="text-gray-200 text-sm">{category.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      {/* Featured Products or Additional Sections can go here */}
     </div>
   )
 }

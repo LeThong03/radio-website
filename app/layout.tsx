@@ -3,7 +3,7 @@ import "./globals.css";
 import { CartProvider } from './context/CartContext'
 import { Suspense } from "react";
 import Script from 'next/script'
-
+import Footer from '././components/Footer'
 
 /*const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +31,12 @@ export default function RootLayout({
       <body>
         <Suspense>
           <CartProvider>
-            {children}
+            <div className="flex flex-col min-h-screen">
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </div>
           </CartProvider>
         </Suspense>
         
