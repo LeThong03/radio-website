@@ -47,7 +47,7 @@ export default function CassettesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation Bar with Facebook Icon */}
-      <nav className="bg-white shadow-lg">
+      <nav className="bg-[#D4C5B2] shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
             <span className="text-2xl font-bold text-gray-800">Quậy Rì-chô</span>
