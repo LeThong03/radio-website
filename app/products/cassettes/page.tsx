@@ -10,6 +10,7 @@ const cassetteProducts = [
     id: 'cassette-1',
     name: 'Sony WM-2',
     price: 149.99,
+    discount: 15,
     description: 'Sony WM-2 – Lỗi thời hay Dấu ấn ? Bạn yêu thích những bản nhạc xưa đầy cảm xúc hay muốn trải nghiệm chất lượng âm thanh vượt thời gian? Sony WM-2 chắc chắn sẽ không làm bạn thất vọng WM-2 mang lại chất lượng âm thanh tuyệt hảo nhờ công nghệ xử lý âm thanh tiên tiến của Sony. Mỗi giai điệu, mỗi nhịp bass đều được tái hiện sống động, trung thực đến từng chi tiết.Với màu đỏ đô cực hiếm cùng cặp tai MDR-E838 bản crystal red là một cặp đôi nguyên tử đem lại những nốt cao thăng hoa và những nốt trầm xao xuyến trong từng bản nhạc Dù bạn là tín đồ công nghệ, người đam mê âm nhạc hay đơn giản là muốn tìm một món quà ý nghĩa, Sony WM-2 sẽ là lựa chọn hoàn hảo.',
     features: ['Auto-reverse', 'Dolby NR', 'Metal tape capability'],
     image: '../images/cassettes/cassett1.jpg',
@@ -24,7 +25,7 @@ const cassetteProducts = [
   },
   {
     id: 'cassette-3',
-    name: 'AIWA HS-PC202 – Máy Cassette Huyền Thoại Dành Cho Tín Đồ Âm Nhạc Cổ Điển',
+    name: 'AIWA HS-PC202',
     price: 199.99,
     description: 'Bạn yêu thích những bản nhạc được phát từ băng cassette? Bạn muốn trải nghiệm âm thanh mộc mạc nhưng đầy cảm xúc từ những thiết bị hoài cổ? AIWA HS-PC202 là chiếc máy cassette hoàn hảo dành cho bạn! Với thiết kế đậm chất retro, chất lượng âm thanh vượt thời gian và những tính năng hiện đại so với thời kỳ của nó, HS-PC202 chính là biểu tượng của sự kết hợp giữa công nghệ và nghệ thuật. Trang bị công nghệ tiên tiến, HS-PC202 mang lại âm thanh mượt mà, chân thực và đầy cảm xúc. Những giai điệu từ chiếc băng cassette sẽ được tái hiện sống động, gợi nhớ những ký ức đẹp trong quá khứ. HS-PC202 được tích hợp tính năng Auto-Reverse, cho phép băng tự động phát mặt B mà không cần tháo ra đảo chiều. Đây là tính năng tiên tiến mà không phải máy cassette nào cùng thời cũng có. AIWA HS-PC202 đi kèm với tai nghe chất lượng cao, mang lại trải nghiệm âm thanh riêng tư và chân thực nhất.',
     features: ['Dual capstan', '2-motor mechanism', 'LED meters'],

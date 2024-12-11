@@ -2,7 +2,7 @@
 'use client'
 import { useCart } from '../context/CartContext'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 interface CustomerInfo {
@@ -15,6 +15,26 @@ interface CustomerInfo {
 export default function CheckoutPage() {
   const { items, total, clearCart } = useCart()
   const router = useRouter()
+  
+  // Add states for discount
+  const [discountAmount, setDiscountAmount] = useState(0)
+  const [appliedCode, setAppliedCode] = useState('')
+  const [finalTotal, setFinalTotal] = useState(total)
+
+  // Get discount from localStorage (set in cart page)
+  useEffect(() => {
+    const savedDiscount = localStorage.getItem('cartDiscount')
+    const savedCode = localStorage.getItem('discountCode')
+    if (savedDiscount) {
+      const discount = JSON.parse(savedDiscount)
+      setDiscountAmount(discount)
+      setFinalTotal(total - discount)
+    }
+    if (savedCode) {
+      setAppliedCode(savedCode)
+    }
+  }, [total])
+
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
     name: '',
     phone: '',
@@ -28,7 +48,13 @@ export default function CheckoutPage() {
     setIsSubmitting(true)
 
     try {
+      // Here you would typically send the order to your backend
       await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Clear discount from localStorage
+      localStorage.removeItem('cartDiscount')
+      localStorage.removeItem('discountCode')
+      
       alert('Order placed successfully! We will contact you soon.')
       clearCart()
       router.push('/')
@@ -46,7 +72,7 @@ export default function CheckoutPage() {
           {/* Order Summary */}
           <div className="lg:w-2/5">
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-bold text-blue-600 mb-4">Your Order</h2>
+            <h2 className="text-2xl font-bold text-[#65452D] mb-4">Order Summary</h2>
               <div className="space-y-4">
                 {items.map(item => (
                   <div key={item.id} className="flex items-center gap-4">
@@ -56,18 +82,33 @@ export default function CheckoutPage() {
                       className="w-16 h-16 object-cover rounded"
                     />
                     <div className="flex-1">
-                      <h3 className="font-semibold text-blue-600">{item.name}</h3>
-                      <p className="text-gray-600">
-                        Quantity: <span className="font-bold">{item.quantity}</span> x <span className="text-green-600 font-bold">${item.price.toFixed(2)}</span>
-                      </p>
+                    <h3 className="font-semibold text-[#65452D]">{item.name}</h3>
+                    <p className="text-gray-600">
+                      Quantity: <span className="font-bold text-[#65452D]">{item.quantity}</span> x 
+                      <span className="text-[#8B4513] font-bold"> ${item.price.toFixed(2)}</span>
+                    </p>
                     </div>
                   </div>
                 ))}
+
                 <div className="border-t pt-4">
-                  <div className="flex justify-between text-xl">
-                    <span className="font-bold text-blue-600">Total:</span>
-                    <span className="font-bold text-green-600">${total.toFixed(2)}</span>
+                  <div className="text-[#65452D] font-semibold">
+                    <span className="font-semibold">Subtotal</span>
+                    <span>${total.toFixed(2)}</span>
                   </div>
+                  
+                  {discountAmount > 0 && (
+                    <div className="flex justify-between text-[#2E7D32] mb-2">
+                    <span>Discount {appliedCode && `(${appliedCode})`}</span>
+                    <span>-${discountAmount.toFixed(2)}</span>
+                  </div>
+                  )}
+
+                  <div className="flex justify-between text-xl font-bold">
+                    <span className="text-[#65452D]">Total</span>
+                    <span className="text-[#8B4513]">${finalTotal.toFixed(2)}</span>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -76,16 +117,17 @@ export default function CheckoutPage() {
           {/* Checkout Form */}
           <div className="lg:w-3/5">
             <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-bold text-blue-600 mb-6">Shipping Information</h2>
+            <h2 className="text-2xl font-bold text-[#65452D] mb-6">Shipping Information</h2>
               <div className="space-y-6">
                 <div>
-                  <label className="block text-lg font-semibold text-gray-700 mb-2">
-                    Full Name <span className="text-red-500">*</span>
-                  </label>
+                <label className="block text-lg font-semibold text-[#65452D] mb-2">
+                  Full Name <span className="text-red-500">*</span>
+                </label>
+
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#8B4513]"
                     value={customerInfo.name}
                     onChange={(e) => setCustomerInfo({...customerInfo, name: e.target.value})}
                     placeholder="Enter your full name"
@@ -142,14 +184,14 @@ export default function CheckoutPage() {
                   className={`w-full py-3 rounded-lg text-white font-bold text-lg
                     ${isSubmitting 
                       ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-blue-600 hover:bg-blue-700 transition-colors'
+                      : 'bg-[#8B4513] hover:bg-[#654321] transition-colors'
                     }`}
                 >
                   {isSubmitting ? 'Processing...' : 'Place Order'}
                 </button>
                 <Link 
                   href="/cart"
-                  className="block text-center text-blue-600 hover:text-blue-800 font-semibold"
+                  className="block text-center text-[#8B4513] hover:text-[#654321] font-semibold"
                 >
                   Return to Cart
                 </Link>

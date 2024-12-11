@@ -9,7 +9,7 @@ import Link from 'next/link';
 const cdProducts = [
   {
     id: 'd_1',
-    name: 'Sony Discman D-4 – Trải Nghiệm Âm Nhạc CD Đỉnh Cao',
+    name: 'Sony Discman D-4 ',
     price: 179.99,
     description: 'Bạn đam mê những chiếc đĩa CD với âm thanh trong trẻo, chân thực? Bạn đang tìm kiếm một thiết bị giúp bạn thưởng thức trọn vẹn bộ sưu tập nhạc của mình? Sony Discman D-4 chính là sản phẩm dành cho bạn! Là một trong những mẫu Discman tiên phong của Sony, D-4 mang đến sự kết hợp hoàn hảo giữa thiết kế nhỏ gọn, hiệu năng cao và chất lượng âm thanh vượt trội. Sony D-4 sở hữu kiểu dáng mỏng nhẹ, dễ dàng mang theo bên mình. Với thiết kế kim loại chắc chắn, đây không chỉ là một chiếc máy nghe nhạc mà còn là biểu tượng của phong cách và sự tinh tế. Discman D-4 được trang bị công nghệ tiên tiến của Sony, tái hiện âm thanh CD chuẩn xác và rõ nét. Mỗi nốt nhạc, mỗi nhịp điệu đều được truyền tải chân thực, mang lại trải nghiệm âm nhạc sống động như đang ở phòng thu. D-4 tương thích với mọi loại đĩa CD thông thường, từ album nhạc chính hãng đến các đĩa CD tự ghi. Bạn có thể tận hưởng âm nhạc theo cách riêng của mình mà không gặp bất kỳ giới hạn nào. Chỉ với hai pin AA hoặc sử dụng bộ sạc ngoài, Discman D-4 có thể phát nhạc liên tục hàng giờ, đảm bảo bạn không bỏ lỡ bất kỳ giai điệu nào trong những chuyến đi xa.',
     features: ['Anti-skip protection', 'LCD display', 'Bass boost'],
