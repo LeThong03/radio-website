@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
+declare global {
+  interface Window {
+    gtag: (command: string, action: string, params: any) => void;
+  }
+}
 interface CustomerInfo {
   name: string;
   phone: string;
@@ -46,9 +51,12 @@ export default function CheckoutPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-
+  
     try {
-      // Here you would typically send the order to your backend
+      // Track the purchase event before processing
+      trackPurchase(customerInfo);
+      
+      // Simulate order processing
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       // Clear discount from localStorage
@@ -59,12 +67,44 @@ export default function CheckoutPage() {
       clearCart()
       router.push('/')
     } catch (error) {
+      // Track failed purchase if needed
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'purchase_failed', {
+          error_type: 'submission_error',
+          value: finalTotal
+        });
+      }
       alert('An error occurred. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
+  const trackPurchase = (orderDetails: any) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'purchase', {
+        transaction_id: `ORDER_${Date.now()}`,
+        value: finalTotal,
+        currency: 'USD',
+        items: items.map(item => ({
+          item_id: item.id,
+          item_name: item.name,
+          price: item.price,
+          quantity: item.quantity
+        })),
+        shipping: 0,
+        tax: 0,
+        discount: discountAmount,
+        coupon: appliedCode || undefined,
+        customer_info: {
+          email: orderDetails.email,
+          phone: orderDetails.phone
+        }
+      });
+    }
+  };
+
+ 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4">
