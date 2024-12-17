@@ -1,6 +1,8 @@
 // app/page.tsx
 'use client'
 import Link from 'next/link'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 const categories = [
   {
@@ -49,7 +51,26 @@ const trackFacebookClick = () => {
     });
   }
 };
+
+// Add this type to match your product structure
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+}
+
 export default function Home() {
+  const [searchTerm, setSearchTerm] = useState('')
+  const router = useRouter()
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchTerm.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchTerm)}`)
+    }
+  }
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation Bar with Facebook Icon */}
@@ -97,6 +118,27 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-gray-200 mb-10">
               Experience the warmth of analog sound with our carefully curated collection
             </p>
+            {/* Search Bar */}
+            <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Search for vintage audio products..."
+                  className="w-full px-4 py-3 rounded-lg bg-white/90 backdrop-blur-sm border border-[#8B4513] 
+    focus:ring-2 focus:ring-[#8B4513] focus:outline-none 
+    placeholder-gray-500 
+    text-black font-medium"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-2 bg-[#8B4513] text-white rounded-lg hover:bg-[#654321] transition-colors"
+                >
+                  Search
+                </button>
+              </div>
+            </form>
             <Link 
               href="/products" 
               className="bg-white text-gray-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 inline-block"
