@@ -2,6 +2,7 @@
 'use client'
 import { useCart } from '../../context/CartContext'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -33,15 +34,70 @@ const cdProducts = [
   },
 ];
 
+// Add GA4 tracking functions
+const trackCDCategoryView = () => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'view_item_list', {
+      item_list_id: 'cds',
+      item_list_name: 'CD Players',
+      items: cdProducts.map(product => ({
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        category: 'CD Players'
+      })),
+      total_items: cdProducts.length
+    });
+  }
+};
+
+const trackCDProductView = (product: any) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'view_item', {
+      currency: 'USD',
+      value: product.price,
+      items: [{
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        category: 'CD Players'
+      }]
+    });
+  }
+};
+
+const trackAddToCartCD = (product: any) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'add_to_cart', {
+      currency: 'USD',
+      value: product.price,
+      items: [{
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        quantity: 1,
+        category: 'CD Players'
+      }]
+    });
+  }
+};
+
 export default function CDsPage() {
-   const { addItem } = useCart()
-        const router = useRouter()
+    const { addItem } = useCart()
+    const router = useRouter()
       
-        const handleAddToCart = (product: any) => {
-          addItem(product)
-          router.push('/cart')
-        }
+        // Track category view when page loads
+    useEffect(() => {
+      trackCDCategoryView();
+    }, []);
+
+    const handleAddToCart = (product: any) => {
+      addItem(product)
+      trackAddToCartCD(product)
+      router.push('/cart')
+    }
       
+        
         return (
           <div className="min-h-screen bg-gray-50">
       {/* Navigation Bar with Facebook Icon */}
@@ -86,7 +142,8 @@ export default function CDsPage() {
             <div className="max-w-7xl mx-auto px-4 py-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cdProducts.map(product => (
-                  <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                  <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+                  onMouseEnter={() => trackCDProductView(product)}>
                     <div className="relative h-64">
                       <img 
                         src={product.image}

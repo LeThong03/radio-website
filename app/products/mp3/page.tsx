@@ -4,6 +4,7 @@ import { useCart } from '../../context/CartContext'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react'
 
 const mp3Products = [
   {
@@ -32,14 +33,70 @@ const mp3Products = [
   },
 ];
 
+// Add tracking functions
+const trackMP3CategoryView = () => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'view_item_list', {
+      item_list_id: 'mp3',
+      item_list_name: 'MP3 Players',
+      items: mp3Products.map(product => ({
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        category: 'MP3 Players',
+        features: product.features
+      })),
+      total_items: mp3Products.length
+    });
+  }
+};
+
+const trackMP3ProductView = (product: any) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'view_item', {
+      currency: 'USD',
+      value: product.price,
+      items: [{
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        category: 'MP3 Players',
+        features: product.features
+      }]
+    });
+  }
+};
+
+const trackAddToCartMP3 = (product: any) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'add_to_cart', {
+      currency: 'USD',
+      value: product.price,
+      items: [{
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        quantity: 1,
+        category: 'MP3 Players'
+      }]
+    });
+  }
+};
+
 export default function CassettesPage() {
     const { addItem } = useCart()
     const router = useRouter()
   
-    const handleAddToCart = (product: any) => {
-      addItem(product)
-      router.push('/cart')
-    }
+    // Track category view when page loads
+  useEffect(() => {
+    trackMP3CategoryView();
+  }, []);
+
+  const handleAddToCart = (product: any) => {
+    addItem(product)
+    trackAddToCartMP3(product)
+    router.push('/cart')
+  }
   
     return (
       <div className="min-h-screen bg-gray-50">
@@ -85,7 +142,8 @@ export default function CassettesPage() {
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {mp3Products.map(product => (
-              <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+              onMouseEnter={() => trackMP3ProductView(product)}>
                 <div className="relative h-64">
                   <img 
                     src={product.image}

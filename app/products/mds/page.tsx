@@ -4,6 +4,7 @@ import { useCart } from '../../context/CartContext'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react'
 
 const mdProducts = [
   {
@@ -32,12 +33,68 @@ const mdProducts = [
   },
 ];
 
+// Add GA4 tracking functions
+const trackMDCategoryView = () => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'view_item_list', {
+      item_list_id: 'mds',
+      item_list_name: 'MD Players',
+      items: mdProducts.map(product => ({
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        category: 'MD Players',
+        features: product.features
+      })),
+      total_items: mdProducts.length
+    });
+  }
+};
+
+const trackMDProductView = (product: any) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'view_item', {
+      currency: 'USD',
+      value: product.price,
+      items: [{
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        category: 'MD Players',
+        features: product.features
+      }]
+    });
+  }
+};
+
+const trackAddToCartMD = (product: any) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'add_to_cart', {
+      currency: 'USD',
+      value: product.price,
+      items: [{
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        quantity: 1,
+        category: 'MD Players'
+      }]
+    });
+  }
+};
+
 export default function CassettesPage() {
   const { addItem } = useCart()
   const router = useRouter()
 
+  // Track category view when page loads
+  useEffect(() => {
+    trackMDCategoryView();
+  }, []);
+
   const handleAddToCart = (product: any) => {
     addItem(product)
+    trackAddToCartMD(product)
     router.push('/cart')
   }
 
@@ -85,7 +142,8 @@ export default function CassettesPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {mdProducts.map(product => (
-            <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+            onMouseEnter={() => trackMDProductView(product)}>
               <div className="relative h-64">
                 <img 
                   src={product.image}

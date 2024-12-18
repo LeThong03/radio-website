@@ -4,8 +4,61 @@ import { products } from '../data/products'
 import { categoryImages } from '../data/categories'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect } from 'react'
+
+// Add tracking functions
+declare global {
+  interface Window {
+    gtag: (command: string, action: string, params: any) => void;
+  }
+}
+
+// Enhanced tracking functions
+const trackPageView = () => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'page_view', {
+      page_title: 'Products Menu',
+      page_location: window.location.href,
+      menu_type: 'categories',
+      total_categories: Object.keys(products).length,
+      total_products: Object.values(products).reduce((acc, curr) => acc + curr.length, 0),
+      timestamp: new Date().toISOString()
+    });
+  }
+};
+
+const trackCategoryClick = (category: string, itemCount: number) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'select_category', {
+      category_name: category,
+      items_count: itemCount,
+      category_title: categoryImages[category as keyof typeof categoryImages].title,
+      category_description: categoryImages[category as keyof typeof categoryImages].description,
+      timestamp: new Date().toISOString()
+    });
+  }
+};
+
+const trackCategoryHover = (category: string) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'category_hover', {
+      category_name: category,
+      category_title: categoryImages[category as keyof typeof categoryImages].title,
+      timestamp: new Date().toISOString()
+    });
+  }
+};
+
 
 export default function ProductsPage() {
+
+  useEffect(() => {
+    trackPageView();
+  }, []);
+
+  const handleCategoryClick = (category: string, itemCount: number) => {
+    trackCategoryClick(category, itemCount);
+  };
   return (
     
     <div className="min-h-screen bg-gray-50">
@@ -44,8 +97,9 @@ export default function ProductsPage() {
         <h1 className="text-4xl font-bold text-gray-900 mb-8">Our Products</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {Object.entries(products).map(([category, items]) => (
-            <Link href={`/products/${category}`} key={category}>
-              <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <Link href={`/products/${category}`} key={category} onClick={() => trackCategoryClick(category, items.length)}>
+              <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              onMouseEnter={() => trackCategoryHover(category)}>
                 <div className="relative h-72">
                   <img 
                     src={categoryImages[category as keyof typeof categoryImages].image}
